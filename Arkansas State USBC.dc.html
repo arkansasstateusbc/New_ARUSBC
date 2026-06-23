@@ -65,6 +65,10 @@
         <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
           <a href="#" onClick="{{ item.onClick }}" style="display:block;padding:15px 24px;font-family:'Saira Condensed';font-weight:600;font-size:17px;text-transform:uppercase;letter-spacing:.04em;color:#15181f;border-bottom:1px solid #eef0f3">{{ item.label }}</a>
         </sc-for>
+        <a href="{{ fbUrl }}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;padding:15px 24px;font-family:'Saira Condensed';font-weight:600;font-size:17px;text-transform:uppercase;letter-spacing:.04em;color:#1877F2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073c0 6.027 4.388 11.022 10.125 11.927v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.927-1.956 1.874v2.25h3.328l-.532 3.49h-2.796v8.437C19.612 23.095 24 18.1 24 12.073z"/></svg>
+          Follow Us on Facebook
+        </a>
       </div>
     </sc-if>
   </header>
@@ -277,7 +281,12 @@
                 </div>
                 <div style="margin-top:auto;border-top:1px solid #eef0f3;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px">
                   <span style="font-size:12.5px;color:#9ea2a2;font-family:'Saira Condensed';text-transform:uppercase;letter-spacing:.04em">{{ t.events }}</span>
-                  <a href="#" onClick="{{ t.onClick }}" style="font-family:'Saira Condensed';font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:14px;color:#00338d;white-space:nowrap" style-hover="color:#b71234">View Results →</a>
+                  <div style="display:flex;gap:10px;align-items:center;flex:none">
+                    <sc-if value="{{ t.entryForm }}" hint-placeholder-val="{{ false }}">
+                      <a href="{{ t.entryForm }}" target="_blank" rel="noopener" style="font-family:'Saira Condensed';font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:12px;color:#b71234;white-space:nowrap;border:1px solid #b71234;padding:4px 10px;border-radius:3px" style-hover="background:#b71234;color:#fff">📥 Entry Form</a>
+                    </sc-if>
+                    <a href="#" onClick="{{ t.onClick }}" style="font-family:'Saira Condensed';font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:14px;color:#00338d;white-space:nowrap" style-hover="color:#b71234">View Results →</a>
+                  </div>
                 </div>
               </div>
             </sc-for>
@@ -504,6 +513,22 @@
       </div>
     </section>
 
+    <!-- hof sub-nav -->
+    <div style="background:#fff;border-bottom:2px solid #e2e5ea;position:sticky;top:74px;z-index:40">
+      <div style="max-width:1240px;margin:0 auto;padding:0 24px;display:flex;gap:0">
+        <button onClick="{{ hofGoHof }}" style="padding:16px 22px;border:none;border-bottom:3px solid transparent;background:none;font-family:'Saira Condensed';font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:#15181f;cursor:pointer;position:relative" style-hover="color:#b71234">Hall of Fame
+          <sc-if value="{{ hofIsHof }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;bottom:-3px;left:0;right:0;height:3px;background:#b71234;border-radius:2px 2px 0 0"></span></sc-if>
+        </button>
+        <button onClick="{{ hofGoStar }}" style="padding:16px 22px;border:none;border-bottom:3px solid transparent;background:none;font-family:'Saira Condensed';font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:#15181f;cursor:pointer;position:relative" style-hover="color:#b71234">Star of Tomorrow
+          <sc-if value="{{ hofIsStar }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;bottom:-3px;left:0;right:0;height:3px;background:#b71234;border-radius:2px 2px 0 0"></span></sc-if>
+        </button>
+        <button onClick="{{ hofGoAwards }}" style="padding:16px 22px;border:none;border-bottom:3px solid transparent;background:none;font-family:'Saira Condensed';font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:#15181f;cursor:pointer;position:relative" style-hover="color:#b71234">Awards Luncheon
+          <sc-if value="{{ hofIsAwards }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;bottom:-3px;left:0;right:0;height:3px;background:#b71234;border-radius:2px 2px 0 0"></span></sc-if>
+        </button>
+      </div>
+    </div>
+
+    <sc-if value="{{ hofIsHof }}" hint-placeholder-val="{{ true }}">
     <!-- 2026 inductees -->
     <section style="max-width:1240px;margin:0 auto;padding:56px 24px 20px">
       <div style="font-family:'Saira Condensed';text-transform:uppercase;letter-spacing:.16em;font-size:13px;color:#b71234;font-weight:600;margin-bottom:6px">Class of 2026</div>
@@ -524,7 +549,34 @@
       </div>
     </section>
 
+    </sc-if>
+
+    <!-- Star of Tomorrow sub-page -->
+    <sc-if value="{{ hofIsStar }}" hint-placeholder-val="{{ false }}">
+    <sc-if value="{{ aw }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:1240px;margin:0 auto;padding:56px 24px 80px">
+      <div style="font-family:'Saira Condensed';text-transform:uppercase;letter-spacing:.16em;font-size:13px;color:#f6be00;font-weight:600;margin-bottom:6px">{{ aw.date }}</div>
+      <h2 style="font-family:'Saira Condensed';font-weight:700;font-style:italic;text-transform:uppercase;font-size:clamp(28px,4vw,52px);margin:0 0 8px;color:#15181f">⭐ Star of Tomorrow</h2>
+      <p style="color:#63666a;font-size:16px;margin:0 0 36px;max-width:580px">Recognizing the most promising young bowlers in Arkansas — selected annually at the ASUSBC Awards Luncheon.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px" data-star>
+        <sc-for list="{{ aw.starOfTomorrow }}" as="s" hint-placeholder-count="2">
+          <div style="background:#0a1a40;color:#dbe4f7;border-radius:6px;padding:30px;position:relative;overflow:hidden;box-shadow:0 16px 40px rgba(10,26,64,.28)">
+            <div style="position:absolute;top:0;right:0;width:160px;height:160px;background:repeating-linear-gradient(124deg,rgba(246,190,0,.14) 0 2px,transparent 2px 14px)"></div>
+            <div style="position:absolute;top:18px;right:22px;font-size:42px;opacity:.2">⭐</div>
+            <div style="position:relative">
+              <div style="font-family:'Saira Condensed';font-weight:700;font-size:28px;color:#fff;line-height:1.05;margin-bottom:4px">{{ s.name }}</div>
+              <div style="font-size:13px;color:#f6be00;margin-bottom:16px;font-family:'Saira Condensed';font-weight:600;letter-spacing:.05em;text-transform:uppercase">{{ s.assoc }} · {{ s.home }}</div>
+              <p style="margin:0;font-size:15px;line-height:1.65;color:#b9c6e2">{{ s.bio }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+    </sc-if>
+
     <!-- awards luncheon -->
+    <sc-if value="{{ hofIsAwards }}" hint-placeholder-val="{{ false }}">
     <sc-if value="{{ aw }}" hint-placeholder-val="{{ false }}">
     <section style="background:#fff;border-top:1px solid #e2e5ea;border-bottom:1px solid #e2e5ea;margin-top:40px">
       <div style="max-width:1240px;margin:0 auto;padding:56px 24px">
@@ -596,7 +648,9 @@
       </div>
     </section>
     </sc-if>
+    </sc-if>
 
+    <sc-if value="{{ hofIsHof }}" hint-placeholder-val="{{ true }}">
     <!-- roster -->
     <section style="max-width:1240px;margin:0 auto;padding:54px 24px 80px">
       <div style="font-family:'Saira Condensed';text-transform:uppercase;letter-spacing:.16em;font-size:13px;color:#b71234;font-weight:600;margin-bottom:6px">Complete Roster</div>
@@ -627,6 +681,7 @@
         <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#b71234;margin-right:6px"></span>Meritorious Service</span>
       </div>
     </section>
+    </sc-if>
   </div>
   </sc-if>
 
@@ -642,6 +697,25 @@
       </div>
     </section>
 
+    <!-- about sub-nav -->
+    <div style="background:#fff;border-bottom:2px solid #e2e5ea;position:sticky;top:74px;z-index:40">
+      <div style="max-width:1240px;margin:0 auto;padding:0 24px;display:flex;gap:0;overflow-x:auto">
+        <button onClick="{{ aboutGoAbout }}" style="padding:16px 22px;border:none;border-bottom:3px solid transparent;background:none;font-family:'Saira Condensed';font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:#15181f;cursor:pointer;position:relative;white-space:nowrap" style-hover="color:#b71234">About Us
+          <sc-if value="{{ aboutIsAbout }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;bottom:-3px;left:0;right:0;height:3px;background:#b71234;border-radius:2px 2px 0 0"></span></sc-if>
+        </button>
+        <button onClick="{{ aboutGoLeadership }}" style="padding:16px 22px;border:none;border-bottom:3px solid transparent;background:none;font-family:'Saira Condensed';font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:#15181f;cursor:pointer;position:relative;white-space:nowrap" style-hover="color:#b71234">Leadership
+          <sc-if value="{{ aboutIsLeadership }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;bottom:-3px;left:0;right:0;height:3px;background:#b71234;border-radius:2px 2px 0 0"></span></sc-if>
+        </button>
+        <button onClick="{{ aboutGoSafesport }}" style="padding:16px 22px;border:none;border-bottom:3px solid transparent;background:none;font-family:'Saira Condensed';font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:#15181f;cursor:pointer;position:relative;white-space:nowrap" style-hover="color:#b71234">SafeSport &amp; RVP
+          <sc-if value="{{ aboutIsSafesport }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;bottom:-3px;left:0;right:0;height:3px;background:#b71234;border-radius:2px 2px 0 0"></span></sc-if>
+        </button>
+        <button onClick="{{ aboutGoResources }}" style="padding:16px 22px;border:none;border-bottom:3px solid transparent;background:none;font-family:'Saira Condensed';font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:#15181f;cursor:pointer;position:relative;white-space:nowrap" style-hover="color:#b71234">Forms &amp; Resources
+          <sc-if value="{{ aboutIsResources }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;bottom:-3px;left:0;right:0;height:3px;background:#b71234;border-radius:2px 2px 0 0"></span></sc-if>
+        </button>
+      </div>
+    </div>
+
+    <sc-if value="{{ aboutIsAbout }}" hint-placeholder-val="{{ true }}">
     <!-- mission + contact -->
     <section style="max-width:1240px;margin:0 auto;padding:54px 24px 10px">
       <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:30px" data-aboutgrid>
@@ -666,6 +740,8 @@
       </div>
     </section>
 
+    </sc-if>
+    <sc-if value="{{ aboutIsLeadership }}" hint-placeholder-val="{{ false }}">
     <!-- leadership -->
     <section style="max-width:1240px;margin:0 auto;padding:46px 24px 10px">
       <div style="font-family:'Saira Condensed';text-transform:uppercase;letter-spacing:.16em;font-size:13px;color:#b71234;font-weight:600;margin-bottom:8px">Board &amp; Committees</div>
@@ -688,6 +764,30 @@
       <p style="margin:18px 0 0;color:#63666a;font-size:14px">Terms run on a 3-year cycle. To reach a board member directly, <a href="mailto:arkansasstateusbc@gmail.com" style="color:#00338d;border-bottom:1px solid #b71234">contact the association</a>.</p>
     </section>
 
+    </sc-if>
+    <sc-if value="{{ aboutIsSafesport }}" hint-placeholder-val="{{ false }}">
+    <!-- safesport / rvp -->
+    <section style="max-width:1240px;margin:30px auto 0;padding:0 24px">
+      <div style="background:#fff;border:1px solid #e2e5ea;border-left:5px solid #f6be00;border-radius:5px;padding:28px 32px">
+        <div style="font-family:'Saira Condensed';text-transform:uppercase;letter-spacing:.16em;font-size:13px;color:#856404;font-weight:600;margin-bottom:8px">⚠ Required — All Volunteers Working with Youth</div>
+        <h2 style="font-family:'Saira Condensed';font-weight:700;font-style:italic;text-transform:uppercase;font-size:clamp(22px,2.8vw,34px);margin:0 0 20px;color:#00338d">SafeSport &amp; RVP Requirements</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px" data-two>
+          <div>
+            <div style="font-family:'Saira Condensed';font-weight:700;font-size:18px;color:#b71234;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">SafeSport Training</div>
+            <p style="font-size:15px;line-height:1.65;color:#3a3f4a;margin:0 0 14px">USBC requires all adults in a position of authority over minor athletes — coaches, officials, chaperones, and volunteers working with youth — to complete SafeSport Awareness training before participating in any youth event. Training is free and takes approximately 90 minutes online.</p>
+            <a href="https://uscenterforsafesport.org/response-and-resolution/safesport-training/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#00338d;color:#fff;font-family:'Saira Condensed';font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:14px;padding:11px 20px;border-radius:3px" style-hover="background:#0a3f9e">Complete SafeSport Training ↗</a>
+          </div>
+          <div>
+            <div style="font-family:'Saira Condensed';font-weight:700;font-size:18px;color:#b71234;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">RVP Background Check</div>
+            <p style="font-size:15px;line-height:1.65;color:#3a3f4a;margin:0 0 14px">USBC's Registered Volunteer Program (RVP) requires all adults who interact with youth bowlers in an official capacity to complete a national background check. This is mandatory for certified coaches, team chaperones, and tournament volunteers serving youth programs in Arkansas.</p>
+            <a href="https://bowl.com/rvp" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#b71234;color:#fff;font-family:'Saira Condensed';font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:14px;padding:11px 20px;border-radius:3px" style-hover="background:#d4243f">Register Through RVP ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </sc-if>
+    <sc-if value="{{ aboutIsResources }}" hint-placeholder-val="{{ false }}">
     <!-- forms + resources -->
     <section style="background:#fff;border-top:1px solid #e2e5ea;margin-top:46px">
       <div style="max-width:1240px;margin:0 auto;padding:54px 24px;display:grid;grid-template-columns:1fr 1fr;gap:40px" data-frgrid>
@@ -718,6 +818,24 @@
       </div>
     </section>
 
+    <!-- entry forms -->
+    <section style="max-width:1240px;margin:0 auto;padding:0 24px 54px">
+      <div style="font-family:'Saira Condensed';text-transform:uppercase;letter-spacing:.16em;font-size:13px;color:#b71234;font-weight:600;margin-bottom:8px">Downloads</div>
+      <h2 style="font-family:'Saira Condensed';font-weight:700;font-style:italic;text-transform:uppercase;font-size:clamp(22px,2.8vw,32px);margin:0 0 18px;color:#00338d">Tournament Entry Forms</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px" data-linkgrid>
+        <sc-for list="{{ entryForms }}" as="ef" hint-placeholder-count="6">
+          <a href="{{ ef.url }}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e2e5ea;border-radius:4px;padding:14px 16px" style-hover="border-color:#b71234;background:#fafbfd">
+            <span style="font-family:'Saira Condensed';font-weight:700;font-size:12px;color:#fff;background:#b71234;padding:4px 8px;border-radius:3px;flex:none">PDF</span>
+            <span style="flex:1;min-width:0">
+              <span style="display:block;font-weight:600;font-size:14px;color:#15181f;line-height:1.3">{{ ef.name }}</span>
+              <span style="display:block;font-size:12px;color:#9ea2a2;margin-top:2px">{{ ef.season }} Season</span>
+            </span>
+            <span style="color:#b71234;font-size:16px;flex:none">↓</span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
     <!-- links -->
     <section style="max-width:1240px;margin:0 auto;padding:54px 24px 80px">
       <div style="font-family:'Saira Condensed';text-transform:uppercase;letter-spacing:.16em;font-size:13px;color:#b71234;font-weight:600;margin-bottom:8px">Around The Sport</div>
@@ -731,6 +849,7 @@
         </sc-for>
       </div>
     </section>
+    </sc-if>
   </div>
   </sc-if>
 
@@ -763,7 +882,11 @@
         <div style="font-size:14px;line-height:1.7;color:#9ea2a2">
           Arkansas State USBC<br>3 Ann Loop<br>Conway, AR 72032<br>
           <a href="tel:5016803607" style="color:#9ec0ff" style-hover="color:#fff">501-680-3607</a><br>
-          <a href="mailto:arkansasstateusbc@gmail.com" style="color:#9ec0ff" style-hover="color:#fff">arkansasstateusbc@gmail.com</a>
+          <a href="mailto:arkansasstateusbc@gmail.com" style="color:#9ec0ff" style-hover="color:#fff">arkansasstateusbc@gmail.com</a><br>
+          <a href="{{ fbUrl }}" target="_blank" rel="noopener" style="color:#9ec0ff;display:inline-flex;align-items:center;gap:6px;margin-top:4px" style-hover="color:#fff">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073c0 6.027 4.388 11.022 10.125 11.927v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.927-1.956 1.874v2.25h3.328l-.532 3.49h-2.796v8.437C19.612 23.095 24 18.1 24 12.073z"/></svg>
+            Facebook ↗
+          </a>
         </div>
       </div>
     </div>
@@ -784,9 +907,9 @@ class Component extends DCLogic {
     // results filters
     q:'', fYouth:'', fSeason:'', fTour:'', fEvent:'', fScoring:'', fDivCode:'', fAssoc:'', fCashed:'', sortBy:'year', sortDir:'desc', limit:100,
     // hof
-    hofQ:'', hofCat:'', hofSort:'year',
+    hofQ:'', hofCat:'', hofSort:'year', hofSubPage:'hof',
     // tournaments page season filter
-    lightbox:null, gallery:null, schedule:null
+    lightbox:null, gallery:null, schedule:null, aboutSubPage:'about'
   };
 
   componentDidMount(){
@@ -858,6 +981,36 @@ class Component extends DCLogic {
     {name:'USBC Rules & Manuals', url:'https://bowl.com/rules', desc:'Playing rules, equipment specifications, and the registered volunteer program.'},
     {name:'BOWL.com Membership', url:'https://bowl.com/membership', desc:'Join or renew USBC membership and access member benefits.'},
     {name:'Find Your Local Association', url:'https://bowl.com/membership/membership-resources/find-a-local-association', desc:'Locate the USBC association that serves your area.'}
+  ];
+  PDF_FORMS = {
+    '2026-OPEN':  'assets/pdfs/2026-open-entry.pdf',
+    '2026-WC':    'assets/pdfs/2026-women-entry.pdf',
+    '2026-YC':    'assets/pdfs/2026-youth-entry.pdf',
+    '2026-YS':    'assets/pdfs/2026-youth-scratch-entry.pdf',
+    '2026-WYC':   'assets/pdfs/2026-wyckoff-entry.pdf',
+    '2026-CHALL': 'assets/pdfs/2026-challenge-entry.pdf',
+    '2025-AY':    'assets/pdfs/2025-adult-youth-entry.pdf',
+    '2025-HBM':   'assets/pdfs/2025-hill-botter-entry.pdf',
+    '2025-SOC':   'assets/pdfs/2025-sr-open-entry.pdf',
+    '2025-SWC':   'assets/pdfs/2025-sr-women-entry.pdf',
+    '2025-YS':    'assets/pdfs/2025-youth-scratch-entry.pdf',
+    '2025-MASTERS':'assets/pdfs/2025-masters-queens-entry.pdf',
+    '2025-TK':    'assets/pdfs/2025-tk-memorial-entry.pdf',
+  };
+  ENTRY_FORMS = [
+    {name:'2026 Open Championship',            url:'assets/pdfs/2026-open-entry.pdf',          season:'2025–2026'},
+    {name:"2026 Women's Championship",         url:'assets/pdfs/2026-women-entry.pdf',         season:'2025–2026'},
+    {name:'2026 Youth Championship',           url:'assets/pdfs/2026-youth-entry.pdf',          season:'2025–2026'},
+    {name:'2026 Youth Scratch Championship',   url:'assets/pdfs/2026-youth-scratch-entry.pdf',  season:'2025–2026'},
+    {name:"2026 Wyckoff Men's Classic",        url:'assets/pdfs/2026-wyckoff-entry.pdf',        season:'2025–2026'},
+    {name:'2026 Challenge Tournament',         url:'assets/pdfs/2026-challenge-entry.pdf',      season:'2025–2026'},
+    {name:'2025 Adult-Youth Championship',     url:'assets/pdfs/2025-adult-youth-entry.pdf',    season:'2024–2025'},
+    {name:'2025 Hill-Botter Memorial Classic', url:'assets/pdfs/2025-hill-botter-entry.pdf',    season:'2024–2025'},
+    {name:'2025 Senior Open Championship',     url:'assets/pdfs/2025-sr-open-entry.pdf',        season:'2024–2025'},
+    {name:"2025 Senior Women's Championship",  url:'assets/pdfs/2025-sr-women-entry.pdf',       season:'2024–2025'},
+    {name:'2025 Youth Scratch Championship',   url:'assets/pdfs/2025-youth-scratch-entry.pdf',  season:'2024–2025'},
+    {name:'2025 Masters & Queens',             url:'assets/pdfs/2025-masters-queens-entry.pdf', season:'2024–2025'},
+    {name:'2025 T.K. Memorial Classic',        url:'assets/pdfs/2025-tk-memorial-entry.pdf',    season:'2024–2025'},
   ];
 
   TOUR_ACCENT(t){
@@ -960,7 +1113,7 @@ class Component extends DCLogic {
     const page=this.state.page;
     const nav=[
       {key:'home',label:'Home'},{key:'tournaments',label:'Tournaments'},{key:'results',label:'Results'},
-      {key:'photos',label:'Photos'},{key:'halloffame',label:'Hall of Fame'},{key:'about',label:'About'}
+      {key:'photos',label:'Photos'},{key:'halloffame',label:'Member Recognition'},{key:'about',label:'About'}
     ];
     const navItems=nav.map(n=>({
       label:n.label,
@@ -1037,7 +1190,7 @@ class Component extends DCLogic {
     if(d){
       const bySeason={};
       d.tournaments.forEach(t=>{ (bySeason[t.season]=bySeason[t.season]||[]).push(t); });
-      tourSeasons=Object.keys(bySeason).sort().reverse().map(season=>({
+      tourSeasons=Object.keys(bySeason).filter(s=>s==='2025-2026').sort().reverse().map(season=>({
         season, label: season==='2025-2026'?'Current Season':'Archive',
         items: bySeason[season].map(t=>{
           const tg=this.TOUR_TAG(t);
@@ -1050,6 +1203,7 @@ class Component extends DCLogic {
             events:t.events.join(' · '), prizeDisp:t.hasPrize?this.money(t.prizeFund):null, prizeShort:t.hasPrize?this.moneyK(t.prizeFund):'—', hasPrize:t.hasPrize,
             cashers:t.cashers, accent:this.TOUR_ACCENT(t), tag:tg.tag, tagColor:tg.color, champ,
             dates:sc?sc.dates:null, center:sc?sc.center:null, city:sc?sc.city:null,
+            entryForm: this.PDF_FORMS[t.id] || null,
             onClick:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({page:'results', fTour:t.id, fSeason:'', q:'', fYouth:'', fEvent:'', fScoring:'', fDivCode:'', fAssoc:'', fCashed:'', sortBy:'place', sortDir:'asc', limit:100}); try{window.scrollTo(0,0);}catch(_){}}
           };
         })
@@ -1110,7 +1264,7 @@ class Component extends DCLogic {
       goTournaments:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.go('tournaments');},
       goPhotos:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.go('photos');},
       goHof:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.go('halloffame');},
-      goAbout:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.go('about');},
+      goAbout:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({page:'about', aboutSubPage:'about', navOpen:false}); try{window.scrollTo({top:0,left:0,behavior:'auto'});}catch(_){}},
       isHome:page==='home', isResults:page==='results', isTournaments:page==='tournaments',
       isPhotos:page==='photos', isHof:page==='halloffame', isAbout:page==='about',
       loading:this.state.loading, hasData:!!d,
@@ -1137,10 +1291,25 @@ class Component extends DCLogic {
       hofList, hofRecent, hofInductees, hofMerit, hofPerf, hofCount:d?d.halloffame.length:0,
       hofQ:this.state.hofQ, hofCat:this.state.hofCat, hofSort:this.state.hofSort,
       setHofQ, setHofCat, toggleHofSort,
+      hofIsHof: this.state.hofSubPage==='hof',
+      hofIsStar: this.state.hofSubPage==='star',
+      hofIsAwards: this.state.hofSubPage==='awards',
+      hofGoHof:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({hofSubPage:'hof'}); try{window.scrollTo(0,0);}catch(_){}},
+      hofGoStar:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({hofSubPage:'star'}); try{window.scrollTo(0,0);}catch(_){}},
+      hofGoAwards:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({hofSubPage:'awards'}); try{window.scrollTo(0,0);}catch(_){}},
       aw,
       // about
       officers:this.OFFICERS.map(o=>Object.assign({},o,{initials:o.vacant?'—':o.name.split(' ').map(w=>w[0]).join('').slice(0,2)})),
-      links:this.LINKS, forms:this.FORMS, resources:this.RESOURCES
+      links:this.LINKS, forms:this.FORMS, resources:this.RESOURCES,
+      entryForms:this.ENTRY_FORMS, fbUrl:'https://www.facebook.com/ArkansasStateUSBC',
+      aboutIsAbout: this.state.aboutSubPage==='about',
+      aboutIsLeadership: this.state.aboutSubPage==='leadership',
+      aboutIsSafesport: this.state.aboutSubPage==='safesport',
+      aboutIsResources: this.state.aboutSubPage==='resources',
+      aboutGoAbout:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({aboutSubPage:'about'}); try{window.scrollTo(0,0);}catch(_){}},
+      aboutGoLeadership:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({aboutSubPage:'leadership'}); try{window.scrollTo(0,0);}catch(_){}},
+      aboutGoSafesport:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({aboutSubPage:'safesport'}); try{window.scrollTo(0,0);}catch(_){}},
+      aboutGoResources:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({aboutSubPage:'resources'}); try{window.scrollTo(0,0);}catch(_){}}
     };
   }
 }
