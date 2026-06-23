@@ -1,0 +1,14 @@
+{
+  "2026-OPEN":  { "dates": "May 9–10 & 16–17, 2026",              "center": "Professor Bowl",   "city": "Little Rock, AR" },
+  "2026-WC":    { "dates": "Apr 18–19, Apr 25–26, May 2–3, 2026", "center": "Millennium Bowl",  "city": "North Little Rock, AR" },
+  "2026-WYCK":  { "dates": "Feb 14–15, 2026",                     "center": "Professor Bowl",   "city": "Little Rock, AR" },
+  "2026-YC":    { "dates": "Apr 11–12 & 18–19, 2026",             "center": "ALLFAM",           "city": "Cabot, AR" },
+  "2026-YCHAL": { "dates": "Mar 7, 2026",                         "center": "Central Lanes",    "city": "Hot Springs, AR" },
+  "2026-YSCR":  { "dates": "Mar 8, 2026",                         "center": "Central Lanes",    "city": "Hot Springs, AR" },
+  "2025-HB":    { "dates": "Nov 16, 2025",                        "center": "Hijinx",           "city": "Jonesboro, AR" },
+  "2025-SC":    { "dates": "Nov 15, 2025",                        "center": "Hijinx",           "city": "Jonesboro, AR" },
+  "2025-SO":    { "dates": "Oct 11–12, 2025",                     "center": "Thunder Rolls",    "city": "Pine Bluff, AR" },
+  "2025-SW":    { "dates": "Nov 1–2, 2025",                       "center": "Millennium Bowl",  "city": "North Little Rock, AR" },
+  "2025-TK":    { "dates": "Sep 13–14, 2025",                     "center": "Central Lanes",    "city": "Hot Springs, AR" },
+  "2025-AY":    { "dates": "Oct 4–5, 2025",                       "center": "Central Lanes",    "city": "Hot Springs, AR" }
+}
