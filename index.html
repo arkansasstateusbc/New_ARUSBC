@@ -1079,7 +1079,7 @@ class Component extends DCLogic {
     const q=s.q.trim().toLowerCase();
     let rows=d.results.filter(r=>{
       if(s.fSeason && r.season!==s.fSeason) return false;
-      if(s.fTour && r.tid!==s.fTour) return false;
+      if(s.fTour && r.tour!==s.fTour) return false;
       if(s.fEvent && r.event!==s.fEvent) return false;
       if(s.fScoring && r.scoring!==s.fScoring) return false;
       if(s.fAssoc && this.assocDisp(r.assoc)!==s.fAssoc) return false;
@@ -1156,7 +1156,7 @@ class Component extends DCLogic {
           return {short:t.short, entrants:t.entrants, prizeDisp:t.hasPrize?this.moneyK(t.prizeFund):'—',
             accent:this.TOUR_ACCENT(t), tag:tg.tag, tagColor:tg.color,
             dates:sch?sch.dates:null, center:sch?sch.center:null, city:sch?sch.city:null,
-            onClick:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({page:'results', fTour:t.id, fSeason:'', q:'', fYouth:'', fEvent:'', fScoring:'', fDivCode:'', fAssoc:'', fCashed:'', sortBy:'place', sortDir:'asc', limit:100, navOpen:false}); try{window.scrollTo(0,0);}catch(_){}}
+            onClick:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({page:'results', fTour:t.name, fSeason:t.season, q:'', fYouth:'', fEvent:'', fScoring:'', fDivCode:'', fAssoc:'', fCashed:'', sortBy:'place', sortDir:'asc', limit:100, navOpen:false}); try{window.scrollTo(0,0);}catch(_){}}
           };
         })
       }));
@@ -1171,7 +1171,8 @@ class Component extends DCLogic {
     const resPrize = allFiltered.reduce((a,r)=>a+r.prize,0);
     const resCashers = allFiltered.filter(r=>r.cashed).length;
     const seasonsOpt = d ? this.uniqSorted(d.results.map(r=>r.season)) : [];
-    const toursOpt = d ? d.tournaments.map(t=>({id:t.id,short:t.short,season:t.season})) : [];
+    // One entry per unique tournament name — season filter handles the year
+    const toursOpt = d ? [...new Map(d.tournaments.sort((a,b)=>a.name.localeCompare(b.name)).map(t=>[t.name,{id:t.name,short:t.short}])).values()] : [];
     const eventsOpt = d ? this.uniqSorted(d.results.map(r=>r.event)) : [];
     const assocOpt = d ? this.uniqSorted([...new Set(d.results.map(r=>this.assocDisp(r.assoc)).filter(Boolean))]) : [];
     const divCodeOrder=['OPEN','U-10','U-12','U-14','U-16','U-18','11 & Under','12 & Over','A','B','C','D','E','SS'];
@@ -1207,7 +1208,7 @@ class Component extends DCLogic {
             cashers:t.cashers, accent:this.TOUR_ACCENT(t), tag:tg.tag, tagColor:tg.color, champ,
             dates:sc?sc.dates:null, center:sc?sc.center:null, city:sc?sc.city:null,
             entryForm: this.PDF_FORMS[t.id] || null,
-            onClick:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({page:'results', fTour:t.id, fSeason:'', q:'', fYouth:'', fEvent:'', fScoring:'', fDivCode:'', fAssoc:'', fCashed:'', sortBy:'place', sortDir:'asc', limit:100}); try{window.scrollTo(0,0);}catch(_){}}
+            onClick:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({page:'results', fTour:t.name, fSeason:t.season, q:'', fYouth:'', fEvent:'', fScoring:'', fDivCode:'', fAssoc:'', fCashed:'', sortBy:'place', sortDir:'asc', limit:100}); try{window.scrollTo(0,0);}catch(_){}}
           };
         })
       }));
