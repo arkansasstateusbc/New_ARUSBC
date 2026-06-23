@@ -1101,7 +1101,7 @@ class Component extends DCLogic {
       if(s.sortBy==='prize'){ x=a.prize; y=b.prize; return (x-y)*dir; }
       if(s.sortBy==='name'){ return a.name.localeCompare(b.name)*dir; }
       if(s.sortBy==='year'){ x=a.year; y=b.year; if(x!==y) return (x-y)*dir; return (a.place==null?9999:a.place)-(b.place==null?9999:b.place); }
-      if(s.sortBy==='tour'){ const t=a.tour.localeCompare(b.tour)*dir; return t!==0?t:(b.year-a.year); }
+      if(s.sortBy==='tour'){ const t=a.tour.localeCompare(b.tour)*dir; if(t!==0) return t; if(a.year!==b.year) return b.year-a.year; return (a.place==null?9999:a.place)-(b.place==null?9999:b.place); }
       return 0;
     });
     return rows;
